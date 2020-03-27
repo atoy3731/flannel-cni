@@ -1,0 +1,11 @@
+resources:
+  - url: "https://github.com/containernetworking/cni/releases/download/v0.6.0/cni-amd64-v0.6.0.tgz"
+    filename: "cni.tgz"
+    validation:
+      type: "sha256"
+      value: "a7f84a742c8f3a95843b3cc636444742554a4853835649ec371a07c841daebab"
+  - url: "https://github.com/containernetworking/plugins/releases/download/v0.6.0/cni-plugins-amd64-v0.6.0.tgz"
+    filename: "cni-plugins.tgz"
+    validation:
+      type: "sha256"
+      value: "f04339a21b8edf76d415e7f17b620e63b8f37a76b2f706671587ab6464411f2d"

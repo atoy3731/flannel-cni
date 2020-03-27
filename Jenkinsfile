@@ -1,6 +1,11 @@
+@Library('DCCSCR@master') _
+dccscrPipeline(version: "1.4.2")
+
 pipeline {
-  agent {
-     label 'coreos && !rkt-fly'
+  environment {
+    IMAGE_NAME = "flannel-cni"
+    IMAGE_VERSION = "0.3.0"
+    IMAGE_RELEASE = "1"
   }
 
   stages {
@@ -8,15 +13,10 @@ pipeline {
       when {
         branch 'master'
       }
-      environment {
-        QUAY = credentials('quay-io_flannel-cni')
-      }
       steps {
         sh """
         cat /etc/os-release
-        docker version
-        docker login -u=$QUAY_USR -p=$QUAY_PSW quay.io
-        bash -x ./scripts/build-image.sh
+        buildah bud -t ${IMAGE_NAME}:${IMAGE_VERSION}-${IMAGE_RELEASE} .
         """
       }
     }
